@@ -1,0 +1,40 @@
+name: Build Minecraft Java Edition with Maven
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2  # 檢出代碼到工作環境
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        java-version: '17'       # 指定 Java 版本
+        distribution: 'temurin'  # 指定 Java 分發版本（例如 temurin）
+
+    - name: Cache Maven dependencies
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+
+    - name: Build with Maven
+      run: mvn clean install
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: minecraft-build
+        path: target/*.jar  # 假設構建的 JAR 文件位於 target 目錄下
