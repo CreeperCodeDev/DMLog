@@ -1,0 +1,7 @@
+# Discord Webhook Configuration
+webhook-url: "YOUR_WEBHOOK_URL_HERE"
+
+# Message Format
+embed-color: "#00ff00"
+embed-title: "Private Message Log"
+embed-footer: "MessengerLog Plugin"

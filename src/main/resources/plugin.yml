@@ -1,0 +1,4 @@
+name: DMLog
+version: '1.0-SNAPSHOT'
+main: creeperdev.dmlog.DMLog
+api-version: '1.20'
